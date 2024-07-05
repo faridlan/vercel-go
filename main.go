@@ -1,7 +1,11 @@
 package main
 
 import (
+	"net/http"
+	"os"
+
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/adaptor"
 )
 
 // type User struct {
@@ -56,13 +60,24 @@ import (
 // }
 
 func main() {
+	if os.Getenv("VERCEL") == "" {
+		app := fiber.New()
 
+		app.Get("/", func(c *fiber.Ctx) error {
+			return c.SendString("Hello World")
+		})
+
+		app.Listen(":3000") // Listen on port 3000 for local development
+	}
+}
+
+// Handler is the entry point for Vercel
+func Handler(w http.ResponseWriter, r *http.Request) {
 	app := fiber.New()
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Hello World")
 	})
 
-	app.Listen(":8080")
-
+	adaptor.FiberApp(app)(w, r)
 }
