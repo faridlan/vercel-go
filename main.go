@@ -61,6 +61,8 @@ import (
 
 // Handler is the entry point for Vercel
 func Handler(w http.ResponseWriter, r *http.Request) {
+
+	//Create fiber
 	app := fiber.New()
 
 	app.Get("/", func(c *fiber.Ctx) error {
