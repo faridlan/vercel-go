@@ -63,6 +63,6 @@ func main() {
 		return c.SendString("Hello World")
 	})
 
-	app.Listen("localhost:8080")
+	app.Listen(":8080")
 
 }
