@@ -2,6 +2,7 @@ package service
 
 import (
 	"encoding/json"
+	"log"
 	"os"
 
 	"github.com/faridlan/vercel-go/model"
@@ -26,6 +27,7 @@ import (
 func ConvertJson() (*model.Profile, error) {
 	reader, err := os.Open("./profile.json")
 	if err != nil {
+		log.Printf("Error opening profile.json: %v", err)
 		return nil, err
 	}
 	defer reader.Close()
@@ -35,6 +37,7 @@ func ConvertJson() (*model.Profile, error) {
 	profile := &model.Profile{}
 	err = decoder.Decode(profile)
 	if err != nil {
+		log.Printf("Error decoding profile.json: %v", err)
 		return nil, err
 	}
 

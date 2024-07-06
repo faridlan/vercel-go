@@ -31,9 +31,10 @@ func main() {
 
 		profile, err := service.ConvertJson()
 		if err != nil {
-			return c.Status(fiber.StatusInternalServerError).SendString("Error reading profile data")
+			return c.Status(fiber.StatusInternalServerError).SendString(fmt.Sprintf("Error reading profile data: %v", err))
 		}
 		return c.SendString(fmt.Sprintf("Username: %s\nEmail: %s", profile.Username, profile.Email))
+
 	})
 
 	log.Fatal(app.Listen(":3000"))
