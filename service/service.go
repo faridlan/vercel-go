@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/faridlan/vercel-go/model"
 )
@@ -25,7 +26,14 @@ import (
 // }
 
 func ConvertJson() (*model.Profile, error) {
-	reader, err := os.Open("./profile.json")
+	// Construct the file path based on the environment
+	basePath := "./"
+	if os.Getenv("VERCEL_ENV") != "" {
+		basePath = "/var/task/"
+	}
+	filePath := filepath.Join(basePath, "profile.json")
+
+	reader, err := os.Open(filePath)
 	if err != nil {
 		log.Printf("Error opening profile.json: %v", err)
 		return nil, err
