@@ -29,9 +29,11 @@ func main() {
 
 	app.Get("/profile", func(c *fiber.Ctx) error {
 
-		profile := service.ConvertJson()
-
-		return c.SendString(fmt.Sprintf("Username : %s \n Email: %s", profile.Username, profile.Email))
+		profile, err := service.ConvertJson()
+		if err != nil {
+			return c.Status(fiber.StatusInternalServerError).SendString("Error reading profile data")
+		}
+		return c.SendString(fmt.Sprintf("Username: %s\nEmail: %s", profile.Username, profile.Email))
 	})
 
 	log.Fatal(app.Listen(":3000"))

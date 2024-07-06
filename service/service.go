@@ -23,16 +23,22 @@ import (
 
 // }
 
-func ConvertJson() *model.Profile {
+func ConvertJson() (*model.Profile, error) {
+	reader, err := os.Open("./profile.json")
+	if err != nil {
+		return nil, err
+	}
+	defer reader.Close()
 
-	reader, _ := os.Open("./profile.json")
-	encoder := json.NewDecoder(reader)
+	decoder := json.NewDecoder(reader)
 
-	profile := model.Profile{}
-	encoder.Decode(&profile)
+	profile := &model.Profile{}
+	err = decoder.Decode(profile)
+	if err != nil {
+		return nil, err
+	}
 
-	return &profile
-
+	return profile, nil
 }
 
 // func Greet(ctx *fiber.Ctx) error {
