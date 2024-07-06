@@ -1,4 +1,4 @@
-package handler
+package main
 
 import (
 	"net/http"
@@ -74,4 +74,14 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	})
 
 	adaptor.FiberApp(app)(w, r)
+}
+
+func main() {
+	// Create a simple server
+	http.HandleFunc("/", Handler)
+
+	// Start the server on port 3000
+	if err := http.ListenAndServe(":3000", nil); err != nil {
+		panic(err)
+	}
 }
