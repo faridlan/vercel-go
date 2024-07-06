@@ -2,7 +2,11 @@ module github.com/faridlan/vercel-go
 
 go 1.22.3
 
-require github.com/gofiber/fiber/v2 v2.52.5
+require (
+	github.com/gofiber/adaptor/v2 v2.2.1
+	github.com/gofiber/fiber/v2 v2.52.5
+	github.com/joho/godotenv v1.5.1
+)
 
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
