@@ -26,7 +26,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 		profile := service.ConvertJson()
 
-		return c.SendString(fmt.Sprintf("Username : %s \nEmail: %s", profile.Username, profile.Email))
+		return c.SendString(fmt.Sprintf("Username : %s \nEmail : %s", profile.Username, profile.Email))
 	})
 
 	adaptor.FiberApp(app)(w, r)

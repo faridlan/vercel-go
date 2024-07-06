@@ -25,7 +25,7 @@ import (
 
 func ConvertJson() *model.Profile {
 
-	reader, _ := os.Open("../profile.json")
+	reader, _ := os.Open("./profile.json")
 	encoder := json.NewDecoder(reader)
 
 	profile := model.Profile{}
