@@ -1,9 +1,11 @@
 package service
 
-// type User struct {
-// 	Name string `json:"name,omitempty"`
-// 	Age  int    `json:"age,omitempty"`
-// }
+import (
+	"encoding/json"
+	"os"
+
+	"github.com/faridlan/vercel-go/model"
+)
 
 // func GetEnv() (*viper.Viper, error) {
 
@@ -21,21 +23,17 @@ package service
 
 // }
 
-// func ConvertJson() *User {
+func ConvertJson() *model.Profile {
 
-// 	env, err := GetEnv()
-// 	if err != nil {
-// 		panic(err)
-// 	}
+	reader, _ := os.Open("../profile.json")
+	encoder := json.NewDecoder(reader)
 
-// 	reader, _ := os.Open(env.GetString("PATH"))
-// 	encoder := json.NewDecoder(reader)
+	profile := model.Profile{}
+	encoder.Decode(&profile)
 
-// 	user := User{}
-// 	encoder.Decode(&user)
+	return &profile
 
-// 	return &user
-// }
+}
 
 // func Greet(ctx *fiber.Ctx) error {
 // 	env, err := GetEnv()

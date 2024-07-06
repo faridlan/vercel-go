@@ -1,9 +1,11 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 
+	"github.com/faridlan/vercel-go/service"
 	"github.com/gofiber/adaptor/v2"
 	"github.com/gofiber/fiber/v2"
 )
@@ -18,6 +20,13 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			name = "World"
 		}
 		return c.SendString("Hello " + name)
+	})
+
+	app.Get("/profile", func(c *fiber.Ctx) error {
+
+		profile := service.ConvertJson()
+
+		return c.SendString(fmt.Sprintf("Username : %s \nEmail: %s", profile.Username, profile.Email))
 	})
 
 	adaptor.FiberApp(app)(w, r)
