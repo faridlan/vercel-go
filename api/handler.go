@@ -31,5 +31,12 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		return c.SendString(fmt.Sprintf("Username: %s\nEmail: %s", profile.Username, profile.Email))
 	})
 
+	app.Get("/wd", func(c *fiber.Ctx) error {
+
+		path, _ := os.Getwd()
+		return c.SendString(path)
+
+	})
+
 	adaptor.FiberApp(app)(w, r)
 }

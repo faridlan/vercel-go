@@ -37,5 +37,12 @@ func main() {
 
 	})
 
+	app.Get("/wd", func(c *fiber.Ctx) error {
+
+		path, _ := os.Getwd()
+		return c.SendString(path)
+
+	})
+
 	log.Fatal(app.Listen(":3000"))
 }
