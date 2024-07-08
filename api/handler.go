@@ -38,5 +38,19 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 	})
 
+	app.Get("/dir", func(c *fiber.Ctx) error {
+
+		directory := []string{}
+		path, _ := os.Getwd()
+		dirs, _ := os.ReadDir(path)
+
+		for _, dir := range dirs {
+			directory = append(directory, dir.Name())
+		}
+
+		return c.JSON(directory)
+
+	})
+
 	adaptor.FiberApp(app)(w, r)
 }
