@@ -27,10 +27,7 @@ import (
 
 func ConvertJson() (*model.Profile, error) {
 	// Construct the file path based on the environment
-	basePath := "./"
-	if os.Getenv("VERCEL_ENV") != "" {
-		basePath = "/var/task/"
-	}
+	basePath, _ := os.Getwd()
 	filePath := filepath.Join(basePath, "profile.json")
 
 	reader, err := os.Open(filePath)
