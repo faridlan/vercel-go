@@ -27,11 +27,8 @@ import (
 
 func ConvertJson() (*model.Profile, error) {
 	// Construct the file path based on the environment
-	basePath := os.Getenv("LAMBDA_TASK_ROOT")
-	if basePath == "" {
-		basePath, _ = os.Getwd()
-	}
-	filePath := filepath.Join(basePath, "profile.json")
+	basePath, _ := os.Getwd()
+	filePath := filepath.Join(basePath, "public", "profile.json")
 
 	reader, err := os.Open(filePath)
 	if err != nil {
