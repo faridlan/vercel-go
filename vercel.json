@@ -1,12 +1,20 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/handler.go", "use": "@vercel/go" }
+    {
+      "src": "api/handler.go",
+      "use": "@vercel/go",
+      "config": {
+        "includeFiles": [
+          "public/profile.json"
+        ]
+      }
+    }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "api/handler.go" }
-  ],
-  "static": {
-    "public": "public"
-  }
+    {
+      "src": "/(.*)",
+      "dest": "api/handler.go"
+    }
+  ]
 }
